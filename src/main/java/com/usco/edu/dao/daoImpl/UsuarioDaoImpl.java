@@ -13,27 +13,32 @@ import com.usco.edu.rowMapper.UsuarioRowMapper;
 public class UsuarioDaoImpl implements IUsuarioDao{
 	
 	@Autowired
-	@Qualifier("JDBCTemplatePlanesLogin")
+	@Qualifier("JDBCTemplateLogin")
 	public JdbcTemplate jdbcTemplate;
+	
+	//REEMPLAZAR LA VISTA DE USURIO POR LA QUE IMPLEMENTA SU APLICATIVO, TENER EN CUENTA LAS VARIBALES DE LA CONSULTA IMPLEMENTADA EN EL ROWMAPPER
 
 	@Override
-	public Usuario findByUsername(String username) {
-		String sql = "select top 1 * from dbo.usuario_estudiante_login uel "
-				+ "inner join uaa u on uel.usg_uaa = u.uaa_codigo "
+	public Usuario buscarUsuario(String username) {
+		String sql = "select top 1 * from carnetizacion.usuario_carnet_digital_login ucdl "
+				+ "inner join uaa u on ucdl.usg_uaa = u.uaa_codigo "
 				+ "inner join sede s on s.sed_codigo = u.sed_codigo "
-				+ "inner join persona p on uel.up = p.per_codigo "
-				+ "where  uel.us = ? order by uel.istipo asc";
+				+ "inner join persona p on ucdl.up = p.per_codigo "
+				+ "where  ucdl.us = ? order by ucdl.istipo asc";
 		return jdbcTemplate.queryForObject(sql, new Object[] { username }, new UsuarioRowMapper());
 	}
 
+
+	//REEMPLAZAR LA VISTA DE USURIO POR LA QUE IMPLEMENTA SU APLICATIVO, TENER EN CUENTA LAS VARIBALES DE LA CONSULTA IMPLEMENTADA EN EL ROWMAPPER
+	
 	@Override
-	public boolean validarUser(String username) {
+	public boolean validarUsuario(String username) {
 		int result = 0;
-		String sql = "select COUNT(uel.us) from dbo.usuario_estudiante_login uel " 
-				+ "inner join uaa u on uel.usg_uaa = u.uaa_codigo "
+		String sql = "select COUNT(ucdl.us) from carnetizacion.usuario_carnet_digital_login ucdl " 
+				+ "inner join uaa u on ucdl.usg_uaa = u.uaa_codigo "
 				+ "inner join sede s on s.sed_codigo = u.sed_codigo "
-				+ "inner join persona p on uel.up = p.per_codigo "
-				+ "where uel.us = ? ";
+				+ "inner join persona p on ucdl.up = p.per_codigo "
+				+ "where ucdl.us = ? ";
 		result =  jdbcTemplate.queryForObject(sql, new Object[] { username }, Integer.class);
 		return result > 0 ? true : false;
 	}

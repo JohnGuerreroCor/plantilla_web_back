@@ -35,11 +35,11 @@ public class UsuarioServiceImpl implements UserDetailsService,IUsuarioService{
 	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
-		if (!usuariodao.validarUser(username)){
+		if (!usuariodao.validarUsuario(username)){
 			logger.error("Error, no exite el usuario '"+username+"' en el sistema!!!");
 			throw new DisabledException("No exite el usuario en el sistema.");
 		}
-		Usuario usuario = usuariodao.findByUsername(username);
+		Usuario usuario = usuariodao.buscarUsuario(username);
 
 		System.out.print("USUARIO:::" + usuario);
 		//con este List sacamos todos los roles del usuario que se esta autenticando	
@@ -56,8 +56,8 @@ public class UsuarioServiceImpl implements UserDetailsService,IUsuarioService{
 
 	@Override
 	@Transactional(readOnly=true)
-	public Usuario findByUsername(String username) {
-		return usuariodao.findByUsername(username);
+	public Usuario buscarUsuario(String username) {
+		return usuariodao.buscarUsuario(username);
 	}
 	
 	

@@ -25,7 +25,7 @@ public class AppConfig {
 	private DataSource dataSource;
 	
 	
-	@Bean(name = "JDBCTemplatePlanesConsulta")
+	@Bean(name = "JDBCTemplateConsulta")
 	public JdbcTemplate jdbcTemplateConsultasjdbc() throws Exception {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate();
 		jdbcTemplate.setDataSource(dataSource);
@@ -34,18 +34,18 @@ public class AppConfig {
 	}
 	
 	
-	@Bean(name = "JDBCTemplatePlanesLogin")
+	@Bean(name = "JDBCTemplateLogin")
 	public JdbcTemplate jdbcTemplateLogin() throws Exception {
 
 		DataSource dataSource = null;
 
 		if (perfilSeleccionado.equals("local")) {
 
-			dataSource = (DataSource) new JndiTemplate().lookup("jboss/datasources/academia3000_jankarlos");
+			dataSource = (DataSource) new JndiTemplate().lookup("jboss/datasources/loginDS");
 
 		} else if (perfilSeleccionado.equals("test") || perfilSeleccionado.equals("produccion")) {
 
-			dataSource = (DataSource) new JndiTemplate().lookup("java:jboss/datasources/EgresadoWebLoginDS");
+			dataSource = (DataSource) new JndiTemplate().lookup("java:jboss/datasources/DatasourceLogueoCreadoPorDBA");
 
 		}
 		JdbcTemplate jdbcTemplate = new JdbcTemplate();
@@ -61,11 +61,11 @@ public class AppConfig {
 
 		if (perfilSeleccionado.equals("local")) {
 
-			dataSource = (DataSource) new JndiTemplate().lookup("jboss/datasources/academia3000_jankarlos");
+			dataSource = (DataSource) new JndiTemplate().lookup("jboss/datasources/ejecucionDS");
 
 		} else if (perfilSeleccionado.equals("test") || perfilSeleccionado.equals("produccion")) {
 
-			dataSource = (DataSource) new JndiTemplate().lookup("java:jboss/datasources/EgresadoWebEjecucionDS");
+			dataSource = (DataSource) new JndiTemplate().lookup("java:jboss/datasources/DatasourceEjecucionCreadoPorDBA");
 
 		}
 		JdbcTemplate jdbcTemplate = new JdbcTemplate();
