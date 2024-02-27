@@ -28,7 +28,7 @@ public class BaseDato {
             DataSource dataSource = null;
 
             // DESCOMENTAR LA LÍNEA 31 PARA EJECUTAR EN LOCAL Y COMENTAR LA LÍNEA 34
-            dataSource = (DataSource) ctx.lookup("jboss/datasources/sonsultaDS");
+            dataSource = (DataSource) ctx.lookup("jboss/datasources/ConsultaDS");
 
             // DESCOMENTAR LA LÍNEA 34 PARA COMPILAR PARA PRODUCCIÓN Y COMENTAR LA LÍNEA 31
             // dataSource = (DataSource) ctx.lookup("java:jboss/datasources/DatasourceConsultaCreadoPorDBA");
