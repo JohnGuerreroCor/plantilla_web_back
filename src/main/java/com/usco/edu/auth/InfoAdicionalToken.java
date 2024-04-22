@@ -27,10 +27,9 @@ public class InfoAdicionalToken implements TokenEnhancer {
         Map<String, Object> info = new HashMap<>();
         info.put("Informacion Token Inicio Sesion", "Campos Necesarios ".concat(authentication.getName()));
         info.put("personaCodigo", usuario.getPersona().getCodigo());
-        info.put("uaaCodigo", usuario.getUaa().getCodigo());
-        info.put("uaaNombre", usuario.getUaa().getNombreCorto());
         info.put("personaNombre", usuario.getPersona().getNombre());
         info.put("personaApellido", usuario.getPersona().getApellido());
+        info.put("horaInicioSesion", usuario.getHoraInicioSesion());
         
 		//LAS VARIABLES ANTERIORES SE CARGAN EN EL TOKEN DE INICIO DE SESIÓN PARA IMPLEMENTAR DENTRO DEL APLICATIVO
 		//AGREGAR LAS NECESARIAS SEGÚN LA FUNCIONALIDAD A IMPLEMENTAR, TENER EN CUENTA MODIFICAR LA ENTIDAD Y ROWMAPPER PARA ELLO

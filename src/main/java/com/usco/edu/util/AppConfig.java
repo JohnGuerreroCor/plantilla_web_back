@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jndi.JndiTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -41,7 +40,7 @@ public class AppConfig {
 
 		if (perfilSeleccionado.equals("local")) {
 
-			dataSource = (DataSource) new JndiTemplate().lookup("jboss/datasources/loginDS");
+			dataSource = (DataSource) new JndiTemplate().lookup("jboss/datasources/LoginDS");
 
 		} else if (perfilSeleccionado.equals("test") || perfilSeleccionado.equals("produccion")) {
 
@@ -61,7 +60,7 @@ public class AppConfig {
 
 		if (perfilSeleccionado.equals("local")) {
 
-			dataSource = (DataSource) new JndiTemplate().lookup("jboss/datasources/ejecucionDS");
+			dataSource = (DataSource) new JndiTemplate().lookup("jboss/datasources/EjecucionDS");
 
 		} else if (perfilSeleccionado.equals("test") || perfilSeleccionado.equals("produccion")) {
 
@@ -73,12 +72,5 @@ public class AppConfig {
 
 		return jdbcTemplate;
 	}
-	
-	@Bean(name = "NamedJDBCTemplateEncuestasConsulta")
-	public NamedParameterJdbcTemplate jdbcTemplateConsulta() throws Exception {
-
-		return new NamedParameterJdbcTemplate(dataSource);
-	}
-	
 
 }

@@ -45,8 +45,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 		.secret(passwordEncoder.encode("12345"))
 		.scopes("read", "write")
 		.authorizedGrantTypes("password", "refresh_token")
-		.accessTokenValiditySeconds(4800)
-		.refreshTokenValiditySeconds(4800);
+		.accessTokenValiditySeconds(3600)// TIEMPO DE VALIDEZ DEL TOKEN DE ACCESO EN SEGUNDOS
+		.refreshTokenValiditySeconds(3600);// TIEMPO DE VALIDEZ DEL TOKEN DE ACCESO EN SEGUNDOS
 	}
 
 	@Override

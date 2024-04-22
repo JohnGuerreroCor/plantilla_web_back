@@ -20,9 +20,7 @@ public class UsuarioDaoImpl implements IUsuarioDao{
 
 	@Override
 	public Usuario buscarUsuario(String username) {
-		String sql = "select top 1 * from carnetizacion.usuario_carnet_digital_login ucdl "
-				+ "inner join uaa u on ucdl.usg_uaa = u.uaa_codigo "
-				+ "inner join sede s on s.sed_codigo = u.sed_codigo "
+		String sql = "select top 1 *, GETDATE() as horaInicioSesion from carnetizacion.usuario_carnet_digital_login ucdl "
 				+ "inner join persona p on ucdl.up = p.per_codigo "
 				+ "where  ucdl.us = ? order by ucdl.istipo asc";
 		return jdbcTemplate.queryForObject(sql, new Object[] { username }, new UsuarioRowMapper());
@@ -35,8 +33,6 @@ public class UsuarioDaoImpl implements IUsuarioDao{
 	public boolean validarUsuario(String username) {
 		int result = 0;
 		String sql = "select COUNT(ucdl.us) from carnetizacion.usuario_carnet_digital_login ucdl " 
-				+ "inner join uaa u on ucdl.usg_uaa = u.uaa_codigo "
-				+ "inner join sede s on s.sed_codigo = u.sed_codigo "
 				+ "inner join persona p on ucdl.up = p.per_codigo "
 				+ "where ucdl.us = ? ";
 		result =  jdbcTemplate.queryForObject(sql, new Object[] { username }, Integer.class);

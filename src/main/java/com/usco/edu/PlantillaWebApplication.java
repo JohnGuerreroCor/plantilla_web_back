@@ -13,6 +13,4 @@ public class PlantillaWebApplication {
 		SpringApplication.run(PlantillaWebApplication.class, args);
 	}
 	
-
-
 }

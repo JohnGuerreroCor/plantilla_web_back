@@ -17,9 +17,9 @@ public class UsuarioRowMapper implements RowMapper<Usuario>{
 		user.setPassword(rs.getString("uwd2"));
 		user.setRole(rs.getString("usg_grupo"));
 		user.setUsername(rs.getString("us"));
-		user.setState(rs.getInt("state") > 0 ? true : false);
-		user.setUaa(new UaaSimpleRowMapper().mapRow(rs, rowNum));
 		user.setPersona(new PersonaRowMapper().mapRow(rs, rowNum));
+		user.setState(rs.getInt("state") > 0 ? true : false);
+		user.setHoraInicioSesion(rs.getString("horaInicioSesion"));
 		return user;
 	}
 
